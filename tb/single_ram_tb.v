@@ -56,7 +56,6 @@ single_ram_module#(
     .o_rdata        (w_rdata    )   
 );
 
-
 task single_ram_write(input integer w_len);
 begin:single_ram_write
     integer i;
