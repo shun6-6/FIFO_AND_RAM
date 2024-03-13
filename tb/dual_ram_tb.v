@@ -48,8 +48,10 @@ dual_ram_module#(
     .P_DATA_WIDTH   (4              ),
     .P_ADDR_DEPTH   (128            )     
 )dual_ram_module_u0(
-    .i_clk          (clk            ),
-    .i_rst          (rst            ),
+    .i_wclk         (clk            ),
+    .i_wrst         (rst            ),
+    .i_rclk         (clk            ),
+    .i_rrst         (rst            ),
     .i_ena          (r_dual_ena     ),
     .i_enb          (r_dual_enb     ),
     .i_wdata        (r_dual_wdata   ),

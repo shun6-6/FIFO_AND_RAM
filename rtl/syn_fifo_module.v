@@ -60,8 +60,10 @@ dual_ram_module#(
     .P_DATA_WIDTH   (P_DATA_WIDTH   ),
     .P_ADDR_DEPTH   (P_ADDR_DEPTH   )     
 )dual_ram_module_u0(
-    .i_clk          (i_clk      ),
-    .i_rst          (i_rst      ),
+    .i_wclk         (i_clk      ),
+    .i_wrst         (i_rst      ),
+    .i_rclk         (i_clk      ),
+    .i_rrst         (i_rst      ),
     .i_ena          (i_wr_en && !o_wfull    ),
     .i_enb          (i_rd_en && !o_rempty   ),
     .i_wdata        (i_wdata    ),

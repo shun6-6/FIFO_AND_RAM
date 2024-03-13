@@ -24,8 +24,10 @@ module dual_ram_module#(
     parameter           P_DATA_WIDTH    =   4   ,
     parameter           P_ADDR_DEPTH    =   128     
 )(
-    input                                   i_clk   ,
-    input                                   i_rst   ,
+    input                                   i_wclk  ,
+    input                                   i_wrst  ,
+    input                                   i_rclk  ,
+    input                                   i_rrst  ,
     input                                   i_ena   ,
     input                                   i_enb   ,
     input  [P_DATA_WIDTH-1 : 0]             i_wdata ,
@@ -47,8 +49,8 @@ reg  [P_DATA_WIDTH-1 : 0]   ro_rdata    ;
 assign o_rdata = ro_rdata;
 
 integer i;
-always @(posedge i_clk or posedge i_rst)begin
-    if(i_rst)begin
+always @(posedge i_wclk or posedge i_wrst)begin
+    if(i_wrst)begin
         for(i = 0; i < P_ADDR_DEPTH; i = i + 1)
             r_reg_ram[i] <= 'd0;
     end
@@ -58,8 +60,8 @@ always @(posedge i_clk or posedge i_rst)begin
         r_reg_ram[i_waddr] <= r_reg_ram[i_waddr];
 end
 
-always @(posedge i_clk or posedge i_rst)begin
-    if(i_rst)
+always @(posedge i_rclk or posedge i_rrst)begin
+    if(i_rrst)
         ro_rdata <= 'd0;
     else if(i_enb)
         ro_rdata <= r_reg_ram[i_raddr];
